@@ -7,7 +7,7 @@ interface PropsType {
   margin?: number;
 }
 
-function useReactPopperPlacement({
+function usePopperPlacement({
   trigger,
   popper,
   direction = 'right',
@@ -74,4 +74,4 @@ function useReactPopperPlacement({
   }, [trigger, popper, direction, margin]);
 }
 
-export default useReactPopperPlacement;
+export default usePopperPlacement;

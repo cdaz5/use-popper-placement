@@ -31,9 +31,9 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "react-popper-placement",
+  "name": "use-popper-placement",
   "author": "Chris D'Ascoli",
-  "module": "dist/react-popper-placement.esm.js",
+  "module": "dist/use-popper-placement.esm.js",
   "devDependencies": {
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",

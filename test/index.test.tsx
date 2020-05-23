@@ -1,7 +1,7 @@
-import useReactPopperPlacement from '../src';
+import usePopperPlacement from '../src';
 
-describe('useReactPopperPlacement', () => {
-  it('import useReactPopperPlacement from "index"', () => {
-    expect(typeof useReactPopperPlacement).toBe('function');
+describe('usePopperPlacement', () => {
+  it('import usePopperPlacement from "index"', () => {
+    expect(typeof usePopperPlacement).toBe('function');
   });
 });
