@@ -1,10 +1,17 @@
 import * as React from 'react';
 
-interface PropsType {
+import { debounce } from './debounce';
+
+export type ResizeOptions = {
+  handleResize: boolean;
+  debounce: number;
+};
+export interface PropsType {
   trigger: React.RefObject<HTMLElement>;
   popper: React.RefObject<HTMLElement>;
   direction?: 'top' | 'bottom' | 'left' | 'right';
   margin?: number;
+  resizeOptions?: ResizeOptions;
 }
 
 function usePopperPlacement({
@@ -12,8 +19,12 @@ function usePopperPlacement({
   popper,
   direction = 'right',
   margin = 8,
+  resizeOptions = {
+    handleResize: false,
+    debounce: 500,
+  },
 }: PropsType) {
-  React.useEffect(() => {
+  const placePopper = React.useCallback(() => {
     if (!trigger.current || !popper.current) return;
 
     const { current: trigEl } = trigger;
@@ -65,13 +76,30 @@ function usePopperPlacement({
         break;
       default:
         throw new Error(
-          `unrecognized direction: ${direction}.  Must be either "top" | "bottom" | "left" | "right"`
+          `unrecognized direction: ${direction}.  Must be either "top" | "bottom" | "left" | "right".`
         );
     }
 
     popEl.style.left = `${left}px`;
     popEl.style.top = `${dir}px`;
   }, [trigger, popper, direction, margin]);
+
+  React.useEffect(() => {
+    placePopper();
+  }, [placePopper]);
+
+  React.useEffect(() => {
+    if (!resizeOptions.handleResize) return;
+
+    window.addEventListener(
+      'resize',
+      debounce(placePopper, resizeOptions.debounce)
+    );
+
+    return () => {
+      window.removeEventListener('resize', placePopper);
+    };
+  }, [placePopper, resizeOptions]);
 }
 
 export default usePopperPlacement;
