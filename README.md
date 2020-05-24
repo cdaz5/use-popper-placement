@@ -46,14 +46,31 @@ const SomeComponent = () => {
 export default SomeComponent;
 ```
 
-## Available Props/Defaults/Types
+## FULL API
 
-| prop              | default | options                   |
-| ----------------- | ------- | ------------------------- |
-| trigger:refObject | -       | -                         |
-| popper:refObject  | -       | -                         |
-| direction:str     | "top"   | "bottom", "left", "right" |
-| margin:number     | 8       | -                         |
+#### `usePopperPlacement({ trigger, popper, direction, margin, resizeOptions }): void`
+
+### `trigger: RefObject`
+
+- a ref to the trigger element.
+
+### `popper: RefObject`
+
+- a ref to the popper element.
+
+### `direction: 'top' | 'bottom' | 'left' | 'right'`
+
+- defaults to `'top'`.
+
+### `margin: number`
+
+- distance (in `px`) the popper will appear from the trigger.
+- defaults to `8`.
+
+### `resizeOptions: { handleResize: boolean; debounce: number }`
+
+- if you would like to update the placement on window resize use this option.
+- defaults to `{ handleResize: false, debounce: 500 }`.
 
 ## License
 
