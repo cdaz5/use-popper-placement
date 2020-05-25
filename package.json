@@ -34,6 +34,7 @@
   "name": "use-popper-placement",
   "author": "Chris D'Ascoli",
   "module": "dist/use-popper-placement.esm.js",
+  "repository": "git@github.com:cdaz5/use-popper-placement.git",
   "devDependencies": {
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",

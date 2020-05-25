@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { debounce } from './debounce';
+import { generateLeftRightTop } from './helpers';
 
 export type ResizeOptions = {
   handleResize: boolean;
@@ -17,7 +18,7 @@ export interface PropsType {
 function usePopperPlacement({
   trigger,
   popper,
-  direction = 'right',
+  direction = 'top',
   margin = 8,
   resizeOptions = {
     handleResize: false,
@@ -45,7 +46,11 @@ function usePopperPlacement({
 
     switch (direction) {
       case 'top':
-        dir = trigDims.top - trigDims.height - margin;
+        dir =
+          trigDims.top -
+          Math.abs(trigDims.height - popDims.height) -
+          trigDims.height -
+          margin;
 
         if (medianWTrigger > medianWPopper) {
           left = trigDims.left + wDif;
@@ -65,12 +70,12 @@ function usePopperPlacement({
 
         break;
       case 'left':
-        dir = trigDims.top;
+        dir = generateLeftRightTop({ trigDims, popDims });
         left = trigDims.left - popDims.width - margin;
 
         break;
       case 'right':
-        dir = trigDims.top;
+        dir = generateLeftRightTop({ trigDims, popDims });
         left = trigDims.right + margin;
 
         break;

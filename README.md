@@ -3,7 +3,7 @@
 A custom [React Hook](https://reactjs.org/docs/hooks-overview.html) that automagically places your popper (dropdown, tooltip, etc.) inline with your desired trigger (top, bottom, left, or right).
 
 `use-popper-placement` accepts two `refObjects`, a `trigger` and `popper`,
-and will automagically align your popper with the trigger.
+and will automagically align your popper with the trigger. See [DEMO](https://codesandbox.io/s/use-popper-placement-demo-oslzc?file=/src/App.js) for examples.
 
 ## Features
 
