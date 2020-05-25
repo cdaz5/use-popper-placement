@@ -3,13 +3,13 @@
 A custom [React Hook](https://reactjs.org/docs/hooks-overview.html) that automagically places your popper (dropdown, tooltip, etc.) inline with your desired trigger (top, bottom, left, or right).
 
 `use-popper-placement` accepts two `refObjects`, a `trigger` and `popper`,
-and will automagically align your popper with the trigger. See [DEMO](https://codesandbox.io/s/use-popper-placement-demo-oslzc?file=/src/App.js) for examples.
+and will automagically align your popper with the trigger. See [DEMO](https://codesandbox.io/s/use-popper-placement-demo-oslzc?file=/src/App.js) for custom tooltip and dropdown examples).
 
 ## Features
 
-⏳ Saves you time by handling all the annoying logic for you
+⏳ Saves you time by handling all the annoying positioning logic for you.
 
-⭐️ Flexibilty to make your own poppers, super light weight (see demos)
+⭐️ Flexibility to make your own custom tooltips, dropdowns, etc.
 
 ## Requirement
 
@@ -25,6 +25,8 @@ $ npm i use-popper-placement
 
 ## Example
 
+_NOTE:_ it's important to set the popper's `position` to `fixed` (see [DEMO's](https://codesandbox.io/s/use-popper-placement-demo-oslzc?file=/src/App.js) for custom tooltip and dropdown examples).
+
 ```js
 import { useRef } from 'react';
 
@@ -35,9 +37,9 @@ const SomeComponent = () => {
 
   return {
     <div ref={trigger}>
-      Hello CodeSandbox
-      <span ref={popper}>
-        Start editing to see some magic happen!
+      I'm a trigger
+      <span ref={popper} style={{ position: 'fixed' }}>
+        I'm a popper!
       </span>
     </div>
   };
