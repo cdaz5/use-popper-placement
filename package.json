@@ -34,7 +34,19 @@
   "name": "use-popper-placement",
   "author": "Chris D'Ascoli",
   "module": "dist/use-popper-placement.esm.js",
-  "repository": "git@github.com:cdaz5/use-popper-placement.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cdaz5/use-popper-placement"
+  },
+  "homepage": "https://github.com/cdaz5/use-popper-placement",
+  "keywords": [
+    "react",
+    "react-hooks",
+    "hooks",
+    "custom hooks",
+    "popper",
+    "tooltip"
+  ],
   "devDependencies": {
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
