@@ -5,7 +5,7 @@ import { generateLeftRightTop } from './helpers';
 
 export type ResizeOptions = {
   handleResize: boolean;
-  debounce: number;
+  debounce?: number;
 };
 export interface PropsType {
   trigger: React.RefObject<HTMLElement>;
@@ -98,13 +98,15 @@ function usePopperPlacement({
 
     window.addEventListener(
       'resize',
-      debounce(placePopper, resizeOptions.debounce)
+      debounce(placePopper, resizeOptions.debounce!)
     );
 
     return () => {
       window.removeEventListener('resize', placePopper);
     };
   }, [placePopper, resizeOptions]);
+
+  return { placePopper };
 }
 
 export default usePopperPlacement;

@@ -50,7 +50,12 @@ export default SomeComponent;
 
 ## FULL API
 
-#### `usePopperPlacement({ trigger, popper, direction, margin, resizeOptions }): void`
+#### `usePopperPlacement({ trigger, popper, direction, margin, resizeOptions }): { placePopper: () => void; }`
+
+### `placePopper: () => void;`
+
+- if for any reason your popper can move around, using the `placePopper` function (returned from the `usePopperPlacement` hook) will give you the ability to trigger recomputing it's placement on the fly.
+- **use-case**: you have an element(s) that has a tooltip inside a container that can scroll, the original dimensions/placement will be incorrect as the user scrolls. In order to account for this you could put a `scroll` listener on the container and create a debounced `placePopper` as the callback (don't forget to remove the listener on unmount!).
 
 ### `trigger: RefObject`
 
