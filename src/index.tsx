@@ -1,16 +1,27 @@
 import * as React from 'react';
 
 import { debounce } from './debounce';
-import { generateLeftRightTop } from './helpers';
+import { generateLeftRightTop, setDir, setLeft } from './helpers';
 
 export type ResizeOptions = {
   handleResize: boolean;
   debounce?: number;
 };
+
+export type Direction =
+  | 'top'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'left'
+  | 'right';
+
 export interface PropsType {
   trigger: React.RefObject<HTMLElement>;
   popper: React.RefObject<HTMLElement>;
-  direction?: 'top' | 'bottom' | 'left' | 'right';
+  direction?: Direction;
   margin?: number;
   resizeOptions?: ResizeOptions;
 }
@@ -43,14 +54,14 @@ function usePopperPlacement({
     const wDif = Math.abs(medianWTrigger - medianWPopper);
 
     let dir, left;
-
     switch (direction) {
       case 'top':
-        dir =
-          trigDims.top -
-          Math.abs(trigDims.height - popDims.height) -
-          trigDims.height -
-          margin;
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
 
         if (medianWTrigger > medianWPopper) {
           left = trigDims.left + wDif;
@@ -59,8 +70,33 @@ function usePopperPlacement({
         }
 
         break;
+      case 'topLeft':
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
+
+        left = trigDims.left;
+        break;
+      case 'topRight':
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
+
+        left = trigDims.right - popDims.width;
+        break;
       case 'bottom':
-        dir = trigDims.bottom + margin;
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
 
         if (medianWTrigger > medianWPopper) {
           left = trigDims.left + wDif;
@@ -68,20 +104,42 @@ function usePopperPlacement({
           left = trigDims.left - wDif;
         }
 
+        break;
+      case 'bottomLeft':
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
+
+        left = trigDims.left;
+        break;
+      case 'bottomRight':
+        dir = setDir({
+          direction,
+          trigDims,
+          popDims,
+          margin,
+        });
+
+        left = trigDims.right - popDims.width;
         break;
       case 'left':
         dir = generateLeftRightTop({ trigDims, popDims });
-        left = trigDims.left - popDims.width - margin;
+
+        left = setLeft({ direction, trigDims, popDims, margin });
 
         break;
       case 'right':
         dir = generateLeftRightTop({ trigDims, popDims });
-        left = trigDims.right + margin;
+
+        left = setLeft({ direction, trigDims, popDims, margin });
 
         break;
       default:
         throw new Error(
-          `unrecognized direction: ${direction}.  Must be either "top" | "bottom" | "left" | "right".`
+          `unrecognized direction: ${direction}.  Must be either "top" | "topLeft" | "topRight" | "bottom" | "bottomLeft" | "bottomRight" | "left" | "right" | "bottomLeft".`
         );
     }
 

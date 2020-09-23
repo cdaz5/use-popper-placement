@@ -11,6 +11,8 @@ and will automagically align your popper with the trigger. See [DEMO](https://co
 
 ⭐️ Flexibility to make your own custom tooltips, dropdowns, etc.
 
+🤔 It's Smart! If the popper will render outside the viewport it will automagically flip the side for you.
+
 ## Requirement
 
 To use `use-popper-placement`, you must use `react@16.8.0` or greater which includes Hooks.
@@ -65,7 +67,7 @@ export default SomeComponent;
 
 - a ref to the popper element.
 
-### `direction: 'top' | 'bottom' | 'left' | 'right'`
+### `direction: 'top' | 'topLeft' | 'topRight' | 'bottom' | 'bottomLeft' | 'bottomRight' | 'left' | 'right'`
 
 - defaults to `'top'`.
 
